@@ -185,7 +185,7 @@ export default function App() {
           orientation={orientation}
         />
 
-        <a href="https://collection.cloudinary.com/drj8voqyf/40ba60c5c848306a44f0eeb73312c3e2" target="_blank"><div className="description">
+        <a href="https://collection.cloudinary.com/drj8voqyf/40ba60c5c848306a44f0eeb73312c3e2" rel="noreferrer" target="_blank"><div className="description">
           <div className="des-title">
             <h1>CS-IS Connect 2.0 Album <span><i class="fa-solid fa-arrow-right"></i></span></h1>
           </div>
