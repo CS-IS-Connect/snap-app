@@ -1,38 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+a{
+  text-decoration: none;
+  color: black;
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  overflow-x: hidden !important;
+  background-image: url("../public/images/BG.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Manrope", sans-serif;
+  max-width: 425px;
+}
+
+.content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 30px;
+  height: 100%;
+  padding-inline: 20px;
+}
+
+.logo {
+  width: 100px;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.title{
+  margin-top: 30px;
+  text-align: left;
+  font-weight: 800;
+  line-height: 30px;
+}
+
+.title span{
+  color: #312f7e;
+  font-size: 28px;
+}
+
+.pic-container {
+  width: 97%; /* Set the width as a percentage of the parent container. */
+  padding-top: 97%; /* Maintain a 1:1 aspect ratio. */
+  margin: 0 auto;
+  position: relative;
+  background-color: gray;
+  background-image: url("../public/images/sample.png");
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  padding-inline:5px;
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.btn{
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+  background-color: #312f7e;
   color: white;
+  padding: 10px;
+  border-radius: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn span{
+  margin-left: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.crop-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.crop-title{
+  font-family: "Manrope", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+}
+
+.finish-btn{
+  margin-inline: 15px;
+  font-family: "Manrope", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  width: 100%;
+  border: none;
+  background-color: #bbbbbb;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.close-btn{
+  align-items: center;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+}
+
+.footer {
+  position: fixed;
+  font-family: "Manrope", sans-serif !important;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #312f7e;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 12px;
+  padding-block: 3px;
+}
+
+.footer a{
+  color: white;
+  text-decoration: underline !important;
+}
+
+.description{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: #c3c3c378;
+  padding: 10px;
+  border-radius: 15px;
+  padding-inline: 15px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.des-title{
+  font-family: "Manrope", sans-serif !important;
+  font-weight: 700;
+  font-size: 11px;
+  width: 100%;
+  text-align: left;
+  line-height: 30px;
+}
+
+.des-pic img{
+  width: 70px;
+  border-radius: 10px;
 }
