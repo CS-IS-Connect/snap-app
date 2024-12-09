@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import jsQR from "jsqr";
-import QRScanner from "react-qr-scanner";  // Import the new scanner
+import ReactQrScanner from "react-qr-scanner";  // Importing react-qr-scanner
 import "./App.css";
 
 export default function QRScannerDialog() {
@@ -18,9 +18,9 @@ export default function QRScannerDialog() {
     };
 
     const handleScan = (data) => {
-        if (data && data.text) {  // Ensure you're accessing the 'text' property of the result
-            setResult(data.text);  // Store only the text data
-            localStorage.setItem("ID", data.text);  // Store the text data in local storage
+        if (data && data.text) {
+            setResult(data.text);  // Store the scanned data
+            localStorage.setItem("ID", data.text);  // Store the data in local storage
             handleClose();
             window.location.reload();
         }
@@ -91,7 +91,7 @@ export default function QRScannerDialog() {
                         )}
 
                         {/* QR scanning from camera using react-qr-scanner */}
-                        <QRScanner
+                        <ReactQrScanner
                             delay={300}
                             onError={handleError}
                             onScan={handleScan}
@@ -102,9 +102,8 @@ export default function QRScannerDialog() {
                         {result && <p>Scanned ID: {result}</p>}
 
                         <div style={{ marginTop: "20px" }}>
-                            <button className="label"
-                            >
-                                <label for='file'>Upload a QR from Gallery</label>
+                            <button className="label">
+                                <label htmlFor="file">Upload a QR from Gallery</label>
                             </button>
                             <input
                                 id="file"
