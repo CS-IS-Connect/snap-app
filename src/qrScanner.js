@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import jsQR from "jsqr";
-import ReactQrScanner from "react-qr-scanner"; 
+import ReactQrScanner from "react-qr-scanner";
 import "./App.css";
 
 export default function QRScannerDialog() {
@@ -20,7 +20,7 @@ export default function QRScannerDialog() {
     const handleScan = (data) => {
         if (data && data.text) {
             setResult(data.text);
-            localStorage.setItem("ID", data.text); 
+            localStorage.setItem("ID", data.text);
             handleClose();
             window.location.reload();
         }
@@ -89,13 +89,9 @@ export default function QRScannerDialog() {
                                 <p>{error}</p>
                             </div>
                         )}
-                        <ReactQrScanner
-                            delay={300}
-                            onError={handleError}
-                            onScan={handleScan}
-                            style={{ width: "100%" }}
-                            facingMode="environment"
-                        />
+                        <QrReader delay={delay} onError={handleError} onScan={handleScan} constraints={{
+                            video: { facingMode: "environment" }
+                        }} />
 
                         {result && <p>Scanned ID: {result}</p>}
 
