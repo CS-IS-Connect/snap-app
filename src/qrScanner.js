@@ -89,9 +89,16 @@ export default function QRScannerDialog() {
                                 <p>{error}</p>
                             </div>
                         )}
-                        <QrReader delay={delay} onError={handleError} onScan={handleScan} constraints={{
-                            video: { facingMode: "environment" }
-                        }} />
+                        <ReactQrScanner
+                            delay={300}
+                            onError={handleError}
+                            onScan={handleScan}
+                            style={{ width: "100%" }}
+                            constraints={{
+                                facingMode: { exact: "environment" }
+                            }}
+                        />
+
 
                         {result && <p>Scanned ID: {result}</p>}
 
