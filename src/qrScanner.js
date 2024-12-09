@@ -95,7 +95,9 @@ export default function QRScannerDialog() {
                             onScan={handleScan}
                             style={{ width: "100%" }}
                             constraints={{
-                                facingMode: { exact: "environment" }
+                                video: {
+                                    facingMode: "environment" // Removes "exact" for better compatibility
+                                }
                             }}
                         />
 
