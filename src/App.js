@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageUploading from "react-images-uploading";
 import Cropper from "react-easy-crop";
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
@@ -6,9 +6,9 @@ import axios from "axios";
 import "./App.css";
 import heic2any from "heic2any";
 import { cropImage } from "./cropUtils";
-import "./App.css";
+import QRScannerDialog from "./qrScanner";
 
-const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME; 
+const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
 const UPLOAD_PRESET = "csis-connect";
 const COLLECTION_TAG = "csis-connect";
 
@@ -64,6 +64,9 @@ export default function App() {
   const [croppedImage, setCroppedImage] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [orientation, setOrientation] = useState("portrait");
+  const [qrscanned, setQrScanned] = useState(false);
+  const [userID, setUserID] = useState(null);
+
 
   const handleCropComplete = async (imageSrc, croppedAreaPixels, orientation) => {
     if (!croppedAreaPixels) {
@@ -100,7 +103,7 @@ export default function App() {
       const isPortrait = img.width < img.height ? "portrait" : "landscape";
       setOrientation(isPortrait);
       setImage([{ dataURL: img.src, file: convertedImage }]);
-      setDialogOpen(true); 
+      setDialogOpen(true);
     };
   };
 
@@ -117,11 +120,20 @@ export default function App() {
 
       const uploadResponse = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, formData);
       const uploadedImageUrl = uploadResponse.data.secure_url;
-      console.log(uploadedImageUrl)
+      console.log(uploadedImageUrl);
     } catch (error) {
       console.error("Error uploading image to Cloudinary:", error);
     }
   };
+
+  useEffect(() => {
+    // Check if there's an ID in localStorage when the component mounts
+    const storedID = localStorage.getItem("ID");
+    if (storedID) {
+      setUserID(storedID);
+      setQrScanned(true);
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -157,19 +169,26 @@ export default function App() {
         </div>
         <div className="buttons">
           {croppedImage && (
-            <a href={croppedImage} download="CS-IS_Connect_2.0.png"><button className="btn">Download <span><i class="fa-solid fa-download"></i></span></button></a>
+            <a href={croppedImage} download="CS-IS_Connect_2.0.png"><button className="btn">Download <span><i className="fa-solid fa-download"></i></span></button></a>
           )}
-          <ImageUploading
-            value={image}
-            onChange={handleImageChange}
-            acceptType={["jpg", "jpeg", "png", "heic", "heif"]}
-          >
-            {({ onImageUpload }) => (
-              <button className="upload-btn btn" onClick={onImageUpload}>
-                Upload Your Picture<span><i className="fa-solid fa-arrow-up-from-bracket"></i></span>
-              </button>
-            )}
-          </ImageUploading>
+          {!qrscanned ? (
+            <QRScannerDialog />
+          ) : (
+            <ImageUploading
+              value={image}
+              onChange={handleImageChange}
+              acceptType={["jpg", "jpeg", "png", "heic", "heif"]}
+            >
+              {({ onImageUpload }) => (
+                <div>
+                  <p>Authenticated ID: {userID}</p>
+                  <button className="upload-btn btn" onClick={onImageUpload}>
+                    Upload Your Picture<span><i className="fa-solid fa-arrow-up-from-bracket"></i></span>
+                  </button>
+                </div>
+              )}
+            </ImageUploading>
+          )}
         </div>
         <ImageCropper
           open={dialogOpen}
@@ -187,7 +206,7 @@ export default function App() {
 
         <a href="https://collection.cloudinary.com/drj8voqyf/40ba60c5c848306a44f0eeb73312c3e2" rel="noreferrer" target="_blank"><div className="description">
           <div className="des-title">
-            <h1>CS-IS Connect 2.0 Album <span><i class="fa-solid fa-arrow-right"></i></span></h1>
+            <h1>CS-IS Connect 2.0 Album <span><i className="fa-solid fa-arrow-right"></i></span></h1>
           </div>
           <div className="des-pic">
             <img src={'./images/cloudinary.png'} alt="clodinary-logo"></img>
