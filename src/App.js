@@ -107,27 +107,34 @@ export default function App() {
     };
   };
 
+  const generateRandomId = () => {
+    return Math.floor(1000 + Math.random() * 9000); 
+  };
+  
   const uploadImageToCloudinary = async (croppedImage) => {
     try {
       const response = await fetch(croppedImage);
       const blob = await response.blob();
 
+      const randomId = generateRandomId();
+      const fileName = `${userID}-${randomId}.png`;
       const formData = new FormData();
-      formData.append("file", blob);
+      formData.append("file", blob, fileName);
       formData.append("upload_preset", UPLOAD_PRESET);
       formData.append("cloud_name", CLOUD_NAME);
       formData.append("tags", COLLECTION_TAG);
-
+  
       const uploadResponse = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, formData);
+      
       const uploadedImageUrl = uploadResponse.data.secure_url;
       console.log(uploadedImageUrl);
     } catch (error) {
       console.error("Error uploading image to Cloudinary:", error);
     }
   };
+  
 
   useEffect(() => {
-    // Check if there's an ID in localStorage when the component mounts
     const storedID = localStorage.getItem("ID");
     if (storedID) {
       setUserID(storedID);

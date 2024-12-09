@@ -102,10 +102,16 @@ export default function QRScannerDialog() {
                         {result && <p>Scanned ID: {result}</p>}
 
                         <div style={{ marginTop: "20px" }}>
+                            <button className="label"
+                            >
+                                <label for='file'>Upload a QR from Gallery</label>
+                            </button>
                             <input
+                                id="file"
                                 type="file"
                                 accept="image/*"
                                 onChange={handleImageUpload}
+                                hidden
                             />
                         </div>
                     </div>

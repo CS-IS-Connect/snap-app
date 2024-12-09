@@ -163,3 +163,21 @@ hr {
   width: 70px;
   border-radius: 10px;
 }
+
+.label{
+  font-family: "Manrope", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  width: 100%;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+label{
+  display: block;
+  width: 100%;
+}
